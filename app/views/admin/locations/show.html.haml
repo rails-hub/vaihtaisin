@@ -1,0 +1,62 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @location.name
+%p
+  %b Area1:
+  = @location.area1
+%p
+  %b Area2:
+  = @location.area2
+%p
+  %b Caretype:
+  = @location.caretype
+%p
+  %b Streetaddress:
+  = @location.streetaddress
+%p
+  %b Streetnumber:
+  = @location.streetnumber
+%p
+  %b Pobox:
+  = @location.pobox
+%p
+  %b Zipcode:
+  = @location.zipcode
+%p
+  %b Ziparea:
+  = @location.ziparea
+%p
+  %b City:
+  = @location.city
+%p
+  %b Phone:
+  = @location.phone
+%p
+  %b Email:
+  = @location.email
+%p
+  %b Supervisor:
+  = @location.supervisor
+%p
+  %b Supervisoremail:
+  = @location.supervisoremail
+%p
+  %b Supervisorphone:
+  = @location.supervisorphone
+%p
+  %b Capacity:
+  = @location.capacity
+
+%p
+  %b Latitude:
+  = @location.lat
+
+%p
+  %b Longitude:
+  = @location.lng
+
+= link_to 'Edit', edit_admin_location_path(@location)
+\|
+= link_to 'Back', admin_locations_path

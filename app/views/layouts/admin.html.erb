@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Vaihtais.in is a simple daycare exchange service</title>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container">
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li>
+								<%= link_to "Home", root_path %>
+							</li>
+							<li>
+								<%= link_to "Wishes", admin_wishes_path %>
+							</li>
+							<li>
+								<%= link_to "Locations", admin_locations_path %>
+							</li>
+						</ul>
+					</div>
+					<% if user_signed_in? %>
+					<li class="btn-group right">
+						<a data-toggle="dropdown" class="btn btn-small dropdown-toggle" href=""><%= current_user.name %> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li>
+								<%= link_to 'Log Out', destroy_user_session_path, :method => 'delete' %>
+							</li>
+
+						</ul>
+					</li>
+					<% end %>
+
+				</div>
+			</div>
+		</div>
+		<div class="container">
+
+			<%= yield %>
+		</div>
+	</body>
+</html>

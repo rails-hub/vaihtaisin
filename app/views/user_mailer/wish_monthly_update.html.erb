@@ -1,0 +1,9 @@
+<p>Hello <%= @user.name.capitalize %>!</p>
+<p>Monthly States:</p>
+
+<p><%= @active_wishes.blank? ? nil : "ACTIVE WISHES : #{@active_wishes.count}" %></p>
+<p><%= @user_accepted_wishes.blank? ? nil : "WISHES ACCEPTED BY USERS: #{@user_accepted_wishes.count}" %></p>
+<p><%= @user_rejected_wishes.blank? ? nil : "WISHES REJECTED BY USERS: #{@user_rejected_wishes.count}" %></p>
+<p><%= @matched_wishes.blank? ? nil : "MATCHED WISHES: #{@matched_wishes.count}" %></p>
+<p><%= @confirmed_wishes.blank? ? nil : "CONFIRMED WISHES: #{@confirmed_wishes.count}" %></p>
+<p><%= @rejected_wishes.blank? ? nil : "REJECTED WISHES: #{@rejected_wishes.count}" %></p>

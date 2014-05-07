@@ -1,0 +1,13 @@
+<p>Hello <%= @user.name.capitalize %>!</p>
+
+<p>See below your Wish Details:</p>
+
+<p>
+  <b> Current Location: </b> <%= @location.name %>
+</p>
+<p>
+  <b> Wished Location(s): </b>
+  <% @wished_locations.each_with_index do |location, index| %>
+      <%= location.location.name %> <%= index + 1 == @wished_locations.size ? nil : ',' %>
+  <% end %>
+</p>

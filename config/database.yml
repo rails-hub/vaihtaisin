@@ -1,0 +1,16 @@
+common: &common
+  adapter: mysql2
+  username: root
+  password: root
+
+development:
+  <<: *common
+  database: vaihtaisin_development
+
+test:
+  <<: *common
+  database: vaihtaisin_test
+
+production:
+  <<: *common
+  database: vaihtaisin_production

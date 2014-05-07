@@ -1,0 +1,54 @@
+= simple_form_for([:admin, @location]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :area1
+    = f.input :area2
+    = f.input :caretype
+    = f.input :streetaddress
+    = f.input :streetnumber
+    = f.input :city
+    = f.input :lat
+    = f.input :lng
+    = f.input :phone
+    = f.input :pobox
+    = f.input :zipcode
+    = f.input :ziparea
+    = f.input :email
+    = f.input :supervisor
+    = f.input :supervisoremail
+    = f.input :supervisorphone
+    = f.input :capacity
+
+  .form-actions
+    = f.button :submit
+  #map-container
+    .map{:id => 'map'}
+
+:javascript
+  var map, fromMarker, toMarker;
+  map = L.map('map');
+
+  function leaflet_map(lat, lng) {
+    var geocoder = new google.maps.Geocoder();
+    var address = $('#location_streetnumber').val() + ' ' + $('#location_streetaddress').val() + ', '+ $('#location_city').val();  //1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK)
+        {
+          if (lat == null && lng == null ) {
+            lat = results[0].geometry.location.lat();
+            lng = results[0].geometry.location.lng();
+          }
+          map.setView([lat, lng], 13);
+          $('#location_lat').val(lat);
+          $('#location_lng').val(lng);
+          var cloudmade_api_key = '#{ENV['LEAFLET_API']}';
+          var basemap = L.tileLayer('http://{s}.tile.cloudmade.com/'+ cloudmade_api_key + '/1/256/{z}/{x}/{y}.png',
+            {
+               maxZoom:18
+            }).addTo(map);
+          L.marker([lat, lng]).addTo(map);
+       }
+    });
+  }

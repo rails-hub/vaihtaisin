@@ -1,0 +1,25 @@
+= simple_form_for(@location) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :area1
+    = f.input :area2
+    = f.input :caretype
+    = f.input :streetaddress
+    = f.input :streetnumber
+    = f.input :pobox
+    = f.input :zipcode
+    = f.input :ziparea
+    = f.input :city
+    = f.input :phone
+    = f.input :email
+    = f.input :supervisor
+    = f.input :supervisoremail
+    = f.input :supervisorphone
+    = f.input :capacity
+    = f.input :lb
+    = f.input :mb
+
+  .form-actions
+    = f.button :submit

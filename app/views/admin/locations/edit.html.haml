@@ -1,0 +1,22 @@
+%h1 Editing location
+
+= render 'form'
+
+= link_to 'Show', [:admin, @location]
+\|
+= link_to 'Back', admin_locations_path
+
+
+:javascript
+  $("#location_city").on({
+      focus: function(){
+      },
+      blur: function() {
+        leaflet_map(null, null);
+        }
+  });
+  $(document).ready(function() {
+       lat = #{@location.lat};
+       lng = #{@location.lng};
+       leaflet_map(lat, lng);
+  });

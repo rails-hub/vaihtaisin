@@ -1,0 +1,8 @@
+<p>Hello <%= @user_by.name.capitalize %>!</p>
+
+<p>Congratulation!!! </p>
+<p> Your wish for Day Care location swap got accepted by one of our user.</p>
+
+
+<p>Please click the link below to Confirm/Decline swap request.</p>
+<%= link_to "Accept Location Swap Request", hand_shake_confirmation_wishes_url(:wish_log => @wish_log, :user_id => @user_by.id) %>

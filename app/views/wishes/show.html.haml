@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @wish.user.name
+%p
+  %b Offer:
+  = @wish.offer
+%p
+  %b Valid until:
+  = @wish.valid_until
+
+= link_to 'Edit', edit_wish_path(@wish)
+\|
+= link_to 'Back', wishes_path

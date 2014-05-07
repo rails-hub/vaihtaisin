@@ -1,0 +1,14 @@
+<p>Hello <%= @user.name.capitalize %>!</p>
+
+<p>We have found a Colloquial Match for your request, so if all parties agree with the swap we can start the process</p>
+
+<p>
+  <b> Your Current Location: </b> <%= @current_location.name %>
+</p>
+
+<p>
+  <b> Your Wished Location: </b> <%= @wished_location.name %>
+</p>
+
+<p>Please click if you agree this colloquial swap.</p>
+<%= link_to "Accept Location Swap Request", colloquial_confirmation_wishes_url(:colloquial_wish_id => @colloquial_wish, :user_id => @user.id) %>

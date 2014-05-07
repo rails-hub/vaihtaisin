@@ -1,0 +1,8 @@
+<p> Hello <%= @user.name.capitalize %>!</p>
+<p>
+  Your wish is about to Expire, the expiry date is <%= @expiry.to_date %>.
+</p>
+
+<p> Please click the link below to extend the date to one more month </p>
+
+<%= link_to "Extend Date to 1 More Month", extend_expiry_wishes_url(:id => @wish.id) %>

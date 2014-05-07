@@ -1,0 +1,14 @@
+<p>Hello <%= @user.name.capitalize %>!</p>
+
+<p>We Found a possible match for your wished location:</p>
+
+
+<p><b> Your Wished Location: </b> <%= @possible_swap.location.name %> </p>
+<p><b> Your Current Location: </b> <%= @your_current_loc %> </p>
+<p><b> User who wants to swap: </b> <%= @wish.user.name %></p>
+<p><b> User is currently located: </b> <%= @user_current_loc %></p>
+<p><b> User wished location: </b> <%= @user_wished_location %></p>
+
+<p>Please click the link below to confirm the wish request.</p>
+
+<%= link_to "Accept Wish Request", accept_match_request_wishes_url(:wish_log => @wish_log, :user_id => @user.id) %>

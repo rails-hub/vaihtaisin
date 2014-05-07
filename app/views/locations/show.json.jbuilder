@@ -1,0 +1,1 @@
+json.extract! @location, :name, :area1, :area2, :caretype, :streetaddress, :streetnumber, :pobox, :zipcode, :ziparea, :city, :phone, :email, :supervisor, :supervisoremail, :supervisorphone, :capacity, :created_at, :updated_at

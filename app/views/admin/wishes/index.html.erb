@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <h3 class="header smaller lighter blue"><i class="icon-globe"></i> Approve Wishes</h3>
+<table id="table_report" class="table">
+	<thead>
+		<tr>
+			<th>Wished Location</th>
+			<th>Offered</th>
+			<th>User</th>
+			<th>Status</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%- @wished_locations.each do |wished_location| %>
+		<tr>
+			<td><%= wished_location.location.name %></td>
+			<td><%= wished_location.wish.offer.try(:name) %></td>
+			<td><%= wished_location.wish.user.name %></td>
+			<td><%= wished_location.wish.status %></td>
+			<td> 
+				<%= link_to '<i class=" btn btn-success icon-ok"></i>'.html_safe, admin_wish_approve_path(:wish_id => wished_location.wish_id, :location_id => wished_location.location_id), method: :get, data: { confirm: 'Are you sure you want to approve wish?' } %>
+				<%= link_to '<i class="btn btn-danger icon-remove"></i>'.html_safe, admin_wish_cancel_path(:wish_id => wished_location.wish_id, :location_id => wished_location.location_id), method: :get, data: { confirm: 'Are you sure you want to cancel wish?' } %> </td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>

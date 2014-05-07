@@ -1,0 +1,49 @@
+one:
+  id: 1
+  name: Location - 1
+  city: 1
+
+two:
+  id: 2
+  name: Location - 2
+  city: 1
+
+three:
+  id: 3
+  name: Location - 3
+  city: 2
+
+four:
+  id: 4
+  name: Location - 4
+  city: 3
+
+five:
+  id: 5
+  name: Location - 5
+  city: 3
+
+six:
+  id: 6
+  name: Location - 6
+  city: 4
+
+seven:
+  id: 7
+  name: Location - 7
+  city: 4
+
+eight:
+  id: 8
+  name: Location - 8
+  city: 4
+
+nine:
+  id: 9
+  name: Location - 9
+  city: 4
+
+ten:
+  id: 10
+  name: Location - 10
+  city: 4

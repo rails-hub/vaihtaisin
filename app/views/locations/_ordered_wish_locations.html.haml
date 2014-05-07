@@ -1,0 +1,89 @@
+-if @saved_wish.blank?
+  %span.badge.badge-success.badge-size
+    3
+%h3 Ordered Wished Locations
+%ul#sortable
+  - if @saved_wish.blank?
+    :javascript
+      $(function() {
+        $( "#sortable" ).sortable({
+            stop: function() {
+            var order_wish_locations = [];
+            wish_id = $('#wish_id').val();
+            $('li.location-container').each(function(){
+               order_wish_locations.push($(this).attr('id'))
+            })
+            $.ajax({
+              url: 'wishes/order_wished_locations?id=' + wish_id + '&order_wish_locations=' + order_wish_locations,
+              type: 'get',
+              dataType: 'html',
+              success: function(data) {
+               $('#order-wish').html(data)
+              }
+            })
+            }
+        });
+        $( "#sortable" ).disableSelection();
+      });
+  -unless @wished_locations.blank?
+    = hidden_field_tag 'h_wished_locations', true
+    :javascript
+      $('#wish_id').val(#{@wish.id});
+
+      function cloudmadeAjax(newUrl ,output ,count ,mape ,callBack) {
+        $.ajax({
+          url: newUrl,
+          async: false,
+          dataType: 'JSONP',
+          type: "GET",
+          cache: false,
+          success: function (response, textStatus, xhr) {
+            if (response.status != 0) return;
+              output.push(response.route_summary.total_time);
+              var point, route, points = [];
+              for (var s=0; s<response.route_geometry.length; s++) {
+                point = new L.LatLng(response.route_geometry[s][0] , response.route_geometry[s][1]);
+                points.push(point);
+              }
+              route= new L.Polyline(points, {
+                weight: 3,
+                opacity: 0.5,
+                smoothFactor: 1
+              }).addTo(mape);
+              route.bringToFront();
+            }
+          });
+       }
+
+    -@wished_locations.each_with_index do |location_wish, i|
+      %li.location-container{ :id => "#{location_wish.location.id}"}
+        %span.badge
+          = i + 1
+        .span11.order-wish-cont-span3
+          .map{:id => "ordered_location-image_#{i + 1}" , :class => "location_image" }
+          %p
+            %b District-
+            %b
+              = location_wish.location.city
+            \/ #{location_wish.location.name}
+        :javascript
+          $(function () {
+            if(!#{@wished_locations.blank?}){
+              var output = [];
+              var cloudmade_api_key = '#{ENV['LEAFLET_API']}';
+              var map, fromMarker, toMarker;
+
+              map = L.map("ordered_location-image_#{i + 1}").setView([#{@c_location.lat}, #{@c_location.lng}], 10);
+              var basemap = L.tileLayer('http://{s}.tile.cloudmade.com/'+ cloudmade_api_key + '/1/256/{z}/{x}/{y}.png',
+                {
+                  maxZoom:18
+                }).addTo(map);
+
+              fromMarker = new L.Marker(new L.latLng([#{@c_location.lat},#{@c_location.lng}])).addTo(map);
+              toMarker =  new L.Marker(new L.latLng([#{location_wish.location.lat},#{location_wish.location.lng}])).addTo(map);
+
+              cloudmadeAjax('http://routes.cloudmade.com/' + cloudmade_api_key +'/api/0.3/' + fromMarker.getLatLng().lat + ',' + fromMarker.getLatLng().lng + ',' + toMarker.getLatLng().lat + ',' + toMarker.getLatLng().lng + '/car.js?callback?' , output, #{i + 1} ,map ,function (myRtn) {
+                getRoute(myRtn);
+              });
+            }
+          });

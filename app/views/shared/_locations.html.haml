@@ -1,0 +1,11 @@
+-unless @location.blank?
+  = select_tag :location_id, options_for_select(@location.map {|loc| [loc.name, loc.id]}, @wish.blank? ? nil: @wish.offer_id), :prompt => 'Select Location'
+-else
+  = select_tag :location_id, nil, :prompt => 'Select Location'
+:javascript
+  $('#location_id').change(function(){
+    html_text = $("#route_id option:selected").text()
+    location_text = $("#location_id option:selected").text()
+    $('#d_location').html(html_text + ' / ' + location_text)
+    show_save()
+  })

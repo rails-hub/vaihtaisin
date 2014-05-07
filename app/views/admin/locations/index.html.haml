@@ -1,0 +1,53 @@
+%h3.header.smaller.lighter.blue
+  %i.icon-tag
+  Listing locations
+= link_to 'New Location', new_admin_location_path, :class => "btn btn-primary"
+%br
+%br
+%table.table.table-condensed
+  %tr
+    %th Name
+    %th Area1
+    %th Area2
+    %th Caretype
+    %th Streetaddress
+    %th Streetnumber
+    %th Pobox
+    %th Zipcode
+    %th Ziparea
+    %th City
+    %th Phone
+    %th Email
+    %th Supervisor
+    %th Supervisoremail
+    %th Supervisorphone
+    %th Capacity
+    %th
+    %th
+    %th
+
+  - @locations.each do |location|
+    %tr
+      %td= location.name
+      %td= location.area1
+      %td= location.area2
+      %td= location.caretype
+      %td= location.streetaddress
+      %td= location.streetnumber
+      %td= location.pobox
+      %td= location.zipcode
+      %td= location.ziparea
+      %td= location.city
+      %td= location.phone
+      %td= location.email
+      %td= location.supervisor
+      %td= location.supervisoremail
+      %td= location.supervisorphone
+      %td= location.capacity
+      %td= link_to '<i class="btn btn-info icon-search"></i>'.html_safe, [:admin, location]
+      %td= link_to '<i class="btn btn-success icon-pencil"></i>'.html_safe, edit_admin_location_path(location)
+      %td= link_to '<i class="btn btn-danger icon-remove"></i>'.html_safe, [:admin, location], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+
+

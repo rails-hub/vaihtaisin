@@ -1,0 +1,49 @@
+%h1 Listing locations
+
+%table
+  %tr
+    %th Name
+    %th Area1
+    %th Area2
+    %th Caretype
+    %th Streetaddress
+    %th Streetnumber
+    %th Pobox
+    %th Zipcode
+    %th Ziparea
+    %th City
+    %th Phone
+    %th Email
+    %th Supervisor
+    %th Supervisoremail
+    %th Supervisorphone
+    %th Capacity
+    %th
+    %th
+    %th
+
+  - @locations.each do |location|
+    %tr
+      %td= location.name
+      %td= location.area1
+      %td= location.area2
+      %td= location.caretype
+      %td= location.streetaddress
+      %td= location.streetnumber
+      %td= location.pobox
+      %td= location.zipcode
+      %td= location.ziparea
+      %td= location.city
+      %td= location.phone
+      %td= location.email
+      %td= location.supervisor
+      %td= location.supervisoremail
+      %td= location.supervisorphone
+      %td= location.capacity
+      %td= link_to 'Show', location
+      %td= link_to 'Edit', edit_location_path(location)
+      %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Location', new_location_path

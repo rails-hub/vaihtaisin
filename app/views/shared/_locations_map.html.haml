@@ -1,0 +1,105 @@
+:javascript
+  loop_count = 0;
+  function cloudmadeAjax(newUrl ,output ,count ,mape ,callBack) {
+      $.ajax({
+          url: newUrl,
+          async: false,
+          dataType: 'JSONP',
+          type: "GET",
+          cache: false,
+          success: function (response, textStatus, xhr) {
+            if (response.status != 0) return;
+              $('#map-distance-'+count).html('Distance: ' + response.route_summary.total_distance/1000 + ' km');
+              $('#map-time-'+count).html('Time by Car: ' + response.route_summary.total_time/60 + ' min');
+              output.push(response.route_summary.total_time);
+              var point, route, points = [];
+              for (var s=0; s<response.route_geometry.length; s++) {
+                point = new L.LatLng(response.route_geometry[s][0] , response.route_geometry[s][1]);
+                     points.push(point);
+              }
+              route= new L.Polyline(points, {
+                weight: 3,
+                opacity: 0.5,
+                smoothFactor: 1
+              }).addTo(mape);
+                route.bringToFront();
+              $('#locations-container_'+count).attr('id', 'locations-container_' + response.route_summary.total_time);
+              loop_count += 1;
+              if (loop_count == #{@location.count}) {
+                //sort_locations(output.sort(sortarray), loop_count)
+              }
+            }
+      });
+  }
+
+  function sortarray(data_A, data_B)
+  {
+     return (data_A - data_B);
+  }
+
+  function sort_locations(distances, size) {
+    for(i = 0; i < size ; i++) {
+     $('#wished_locations').append($('#locations-container_'+distances[i]))
+    }
+  }
+
+-@location.each_with_index do |location, i|
+  .locations-container{:id => "locations-container_#{i + 1}"}
+    .span3
+      %p.selected-text{:id => "selected-text_#{location.id}"}
+        = is_selected(location) ? "Selected":nil
+      .map{:id => "map_#{i + 1}", :name => "map_#{location.id}" , :class => "location_image", :style => "margin: 0px 6px 0px 0px;opacity: #{is_selected(location) ?  0.5: 1}"}
+      %p
+        #{location.name}
+      %small{:id => "map-distance-#{i + 1}"}
+
+      %br/
+      %small{:id => "map-time-#{i + 1}"}
+      :javascript
+        $(function () {
+            var output = [];
+            var cloudmade_api_key = '#{ENV['LEAFLET_API']}';
+            var map, fromMarker, toMarker;
+
+            map = L.map("map_#{i + 1}").setView([#{@c_location.lat}, #{@c_location.lng}], 10);
+            var basemap = L.tileLayer('http://{s}.tile.cloudmade.com/'+ cloudmade_api_key + '/1/256/{z}/{x}/{y}.png',
+              {
+                maxZoom:18
+              }).addTo(map);
+
+            fromMarker = new L.Marker(new L.latLng([#{@c_location.lat},#{@c_location.lng}])).addTo(map);
+            toMarker =  new L.Marker(new L.latLng([#{location.lat},#{location.lng}])).addTo(map);
+
+            cloudmadeAjax('http://routes.cloudmade.com/' + cloudmade_api_key +'/api/0.3/' + fromMarker.getLatLng().lat + ',' + fromMarker.getLatLng().lng + ',' + toMarker.getLatLng().lat + ',' + toMarker.getLatLng().lng + '/car.js?callback?' , output, #{i + 1} ,map ,function (myRtn) {
+            getRoute(myRtn);
+            });
+        });
+
+:javascript
+  $('.location_image').click(function() {
+    id_click = $(this).attr('id');
+    id = $(this).attr('name').split('_');
+    locations = id[1];
+    current_location  = $('#location_id').val();
+    if (current_location == '' || current_location == null) {
+     current_location  = $('#location_offer_id').val();
+    }
+    else {
+     $('#location_offer_id').val(current_location);
+    }
+    valid_until = $('#validuntil').val();
+    $.ajax({
+      url: 'locations/ordered_wishes?id=' + locations + '&valid_until=' + valid_until + '&location=' + current_location,
+      type: 'get',
+      dataType: 'html',
+      success: function(data){
+        $('#' + id_click).css('opacity', '0.5')
+        $('#order-wish').html(data)
+        $("#step-1 *").attr("disabled", "disabled").off('click');
+        $('#selected-text_'+locations).html('Selected');
+        show_save()
+      }
+    })
+  });
+
+

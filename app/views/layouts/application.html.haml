@@ -1,0 +1,642 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "Vaihtais.in is a simple daycare exchange service"
+      %meta{:content => content_for?(:description) ? yield(:description) : "Vaihtais.in is a simple daycare exchange service", :name => "description"}
+        = stylesheet_link_tag "application", :media => "all"
+        = javascript_include_tag "application"
+        = csrf_meta_tags
+        = yield(:head)
+  #wrapper
+  #sidebar
+    %a.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    / <div id="logo"> <a href="/"><img src="img/logo.svg" alt="logo" /></a> </div>
+    %nav#nav.navigation{:role => "navigation"}
+      %ul.unstyled
+        %li.active{"data-section" => "1"}
+          %i.icon-home
+          %span Home
+        %li{"data-section" => "2"}
+          %i.icon-user
+          %span About
+        %li{"data-section" => "3"}
+          %i.icon-laptop
+          %span Projects
+        %li{"data-section" => "4"}
+          %i.icon-pencil
+          %span Social
+        %li.last{"data-section" => "5"}
+          %i.icon-envelope
+          %span Contact
+    / /nav
+  / /sidebar
+  #container
+    %section#section1.section{"data-section" => "1"}
+      .container-fluid
+        .row-fluid
+          .alt-image.img-circle.thumb
+            %img.img-circle{:alt => "Your Name", :src => "/assets/img/thumb.jpg"}/
+          .span8.intro
+          .span4.intro
+            %hgroup
+              %h1 Hello parent!
+              %h3 Your children got daycare but it would be nice to travel less, right?
+            %button.btn-inverse{"data-section" => "2"}
+              Learn
+              %span More
+              %i.icon-circle-arrow-down
+          / /span6
+        / /row-fluid
+      / /container-fluid
+    / /section
+    %section#section2.section{"data-section" => "2"}
+      .container-fluid
+        .row-fluid.title
+          .span5
+            %h2 Vaihtais.in
+          / /span3
+          .span7.hidden-phone
+            %hr/
+          / /span9
+        / /row-fluid
+        .row-fluid.desc
+          .span8
+            %p Vaihtais.in is an information exchange service for parents who got a day care assignment but would like to switch to a more suitable.
+            %p Perhaps your assignment wasn't from your initial preferences, or perhaps you moved. We are here to help!
+            %p You just inform the service of your current location and where you'd like to switch, and if there's another parent we can pair you with and you both approve the switch opportunity the city will be notified. We've helped many parents.
+          / /span8
+        / /row-fluid
+        .row-fluid.content.hidden-tablet.vai-box-shadow
+          .span12.expand
+            %h4 Exchange Stats
+            .row-fluid
+              .span4
+                / CHART N 1
+                .skill
+                  %input.knob-4{"data-anglearc" => "180", "data-angleoffset" => "-90", "data-fgcolor" => "#f1c40f", "data-height" => "122.5", "data-inputcolor" => "#333", "data-max" => "10", "data-readonly" => "true", "data-width" => "245", :readonly => "readonly", :rel => "4", :value => "0"}/
+                  %h4.visible-phone 4
+                  %h6 cups of cofee per week
+                :javascript
+                    jQuery(document).ready(function( $ ) {
+                      // Triggering only when it is inside viewport
+                      jQuery('.knob-4').waypoint(function(){
+                        // Triggering now
+                            jQuery('.knob-4').knob();
+                            // Animating the value
+                            if(jQuery('.knob-4').val() == 0) {
+                            jQuery({value: 0}).animate({value: jQuery('.knob-4').attr("rel")}, {
+                                duration: 5000,
+                                easing:'swing',
+                                step: function()
+                                  {
+                                      jQuery('.knob-4').val(Math.ceil(this.value)).trigger('change');
+                                  }
+                              })
+                          }
+                              }
+                            ,{
+                              triggerOnce: true,
+                              offset: function(){
+                                return $(window).height() - $(this).outerHeight();
+                              }
+                            }
+                          );
+                    });
+
+                / END CHART N 1
+              / /span4
+              .span4
+                / CHART N 2
+                .skill
+                  %input.knob-65{"data-anglearc" => "180", "data-angleoffset" => "-90", "data-fgcolor" => "#f68e51", "data-height" => "122.5", "data-inputcolor" => "#333", "data-max" => "100", "data-readonly" => "true", "data-width" => "245", :readonly => "readonly", :rel => "65", :value => "0"}/
+                  %h4.visible-phone 65
+                  %h6 miles run this week
+                :javascript
+                    jQuery(document).ready(function( $ ) {
+                      // Triggering only when it is inside viewport
+                      jQuery('.knob-65').waypoint(function(){
+                        // Triggering now
+                            jQuery('.knob-65').knob();
+                            // Animating the value
+                            if(jQuery('.knob-65').val() == 0) {
+                            jQuery({value: 0}).animate({value: jQuery('.knob-65').attr("rel")}, {
+                                duration: 5000,
+                                easing:'swing',
+                                step: function()
+                                  {
+                                      jQuery('.knob-65').val(Math.ceil(this.value)).trigger('change');
+                                  }
+                              })
+                          }
+                              }
+                            ,{
+                              triggerOnce: true,
+                              offset: function(){
+                                return $(window).height() - $(this).outerHeight();
+                              }
+                            }
+                          );
+                    });
+
+                / END CHART N 2
+              / /span4
+              .span4
+                / CHART N 3
+                .skill
+                  %input.knob-85{"data-anglearc" => "180", "data-angleoffset" => "-90", "data-fgcolor" => "#2c3e50", "data-height" => "122.5", "data-inputcolor" => "#333", "data-max" => "100", "data-readonly" => "true", "data-width" => "245", :readonly => "readonly", :rel => "85", :value => "0"}/
+                  %h4.visible-phone 85
+                  %h6 new clients this year
+                :javascript
+                    jQuery(document).ready(function( $ ) {
+                      // Triggering only when it is inside viewport
+                      jQuery('.knob-85').waypoint(function(){
+                        // Triggering now
+                            jQuery('.knob-85').knob();
+                            // Animating the value
+                            if(jQuery('.knob-85').val() == 0) {
+                            jQuery({value: 0}).animate({value: jQuery('.knob-85').attr("rel")}, {
+                                duration: 5000,
+                                easing:'swing',
+                                step: function()
+                                  {
+                                      jQuery('.knob-85').val(Math.ceil(this.value)).trigger('change');
+                                  }
+                              })
+                          }
+                              }
+                            ,{
+                              triggerOnce: true,
+                              offset: function(){
+                                return $(window).height() - $(this).outerHeight();
+                              }
+                            }
+                          );
+                    });
+
+                / END CHART N 3
+              / /span4
+            / /row-fluid
+          / /span12
+        / /row-fluid
+        .row-fluid.desc
+          .span9
+            %p Currently we operate in the following cities:
+            .span3
+              %p Helsinki
+              %p Vantaa
+            .span3
+              %p Turku
+            .span3
+              %p Espoo
+        .row-fluid.desc
+          .span9
+            %p We hope to expand next to:
+            .span3
+              %p Jyväskylä
+              %p Mikkeli
+            .span3
+              %p Oulu
+            .span3
+              %p Vaasa
+          / /span8
+        / /row-fluid
+      / /container
+    / /section
+    %section#section3.section{"data-section" => "3"}
+      .container-fluid
+        .row-fluid.title
+          .span5
+            %h2 How to use
+          / /span4
+          .span7.hidden-phone.alt
+            %hr/
+          / /span8
+        .row-fluid.desc
+          .span8
+            %p It's easy! Create an account and add a wish by stating where your kid is taken care of at the moment and choose which locations you'd be most interested in to switch into.
+            %p When there's a potential switch, you'll get to confirm it by email, and finally the city will be put in motion to approve the switch.
+          / /span8
+        / /row
+        .row-fluid.content.slide
+          .span4
+            = image_tag "/assets/img/project01.png"
+            %h6.hidden-phone 1) CREATE AN ACCOUNT
+          / /span4
+          .span4
+            = image_tag "/assets/img/project02.png"
+            %h6.hidden-phone 2) ADD A WISH
+          / /span4
+          .span4
+            = image_tag "/assets/img/potential_switch.jpg"
+            %h6.hidden-phone 3) CONFIRM THE POTENTIAL SWITCH EMAIL -- if all goes well, city will approve the switch
+          / /span4
+        / /row-fluid
+      / /container
+    / /section
+    = yield
+    %section#section4.section{"data-section" => "4"}
+      .container-fluid
+        .row-fluid.title
+          .span4
+            %h2 Blog
+          / /span4
+          .span8.hidden-phone
+            %hr/
+          / /span8
+        / /row-fluid
+        .row-fluid.desc
+          .span8
+            %p Vaihtais.in monitors the changes in the daycare landscape. Here're ours or others blog entries of interest.
+          / /span8
+        / /row-fluid
+        .row-fluid.content.vai-box-shadow
+          .span4
+            %ul.article-tags
+              %li.current{"data-blog" => "blog"}
+                %i.icon-circle-arrow-right>
+                Vaihtais.in Blog
+              %li{"data-blog" => "dribbble"}
+                %i.icon-circle-arrow-right>
+                Other blogs
+              %li{"data-blog" => "instagram"}
+                %i.icon-circle-arrow-right>
+                City disclosures
+              %li{"data-blog" => "github"}
+                %i.icon-circle-arrow-right>
+                Press
+          / /span4
+          .span8.slide.current{"data-blog" => "blog"}
+            .row-fluid
+              .span6.expand
+                %h4 Policy changes completed
+                %p Services like Vaihtais.in would not be possible without daycare policies which allow parents to propose switching locations. The policy change was proposed, handled in the political bodies, and now it also got final approval. We're here to utilize the new opportunity for the benefit of parents!
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+              .span6.visible-desktop
+                %h4 Amazing response
+                %p Just before the service could launch publicly we were confident enough to reach out for parents. We got very welcoming response. The service already has had 10 parents to make a wish for switching locations and during the first day, we've gotten 5 completions. Big thanks for the trust! There's clearly demand for a service like Vaihtais.in.
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+            / /row-fluid
+          / /span8
+          .span8.slide{"data-blog" => "dribbble"}
+            .row-fluid
+              .span6.expand
+                %h4 Isyyspakkaus.com
+                %p{:style => "text-align:center"}
+                  %img{:alt => "", :src => "/assets/img/d_01.jpg"}/
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+              .span6.visible-desktop
+                %h4 Some other blog
+                %p{:style => "text-align:center"}
+                  %img{:alt => "", :src => "/assets/img/d02.png"}/
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+            / /row-fluid
+          / /span8
+          .span8.slide{"data-blog" => "instagram"}
+            .row-fluid
+              .span6.expand
+                %h4 Marcel Newman
+                %p{:style => "text-align:center"}
+                  %img{:alt => "", :src => "/assets/img/i01.jpg"}/
+                .pull-right.read-more
+                  Read More
+                  %i.icon-double-angle-right
+              / /span6
+              .span6.visible-desktop
+                %h4 Brutus The Boss
+                %p{:style => "text-align:center"}
+                  %img{:alt => "", :src => "/assets/img/i02.jpg"}/
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+            / /row-fluid
+          / /span8
+          .span8.slide{"data-blog" => "github"}
+            .row-fluid
+              .span6.expand
+                %h4 Responsive Menu
+                %p Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+              .span6.visible-desktop
+                %h4 Bootstrap JQuery
+                %p Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                .pull-right.read-more
+                  %a{:href => "#", :rel => "external"}
+                    Read More
+                    %i.icon-double-angle-right
+              / /span6
+            / /row-fluid
+          / /span8
+        / /row-fluid
+      / /container
+    / /section
+    %section#section5.section{"data-section" => "5"}
+      .container-fluid
+        .row-fluid.title
+          .span5
+            %h2 Make a wish
+          / /span4
+          .span7.hidden-phone.alt
+            %hr/
+          / /span8
+        / /row-fluid
+        .row-fluid.content.vai-box-shadow
+          -unless user_signed_in?
+            .span4
+              %h4.intro Contact us!
+              %p If you have any questions just throw me a mail or give a call.
+              .row-fluid.alt
+                %h5 Email:
+                %span aleksi@vaihtais.in
+              / /row
+              .row-fluid.alt
+                %h5 Phone:
+                %span +358-40-704 7009
+              / /row
+              .row-fluid.alt
+                %h5 Twitter:
+                %span
+                  %a{:href => "http://www.twitter.com/vaihtaisin", :rel => "external"} @vaihtaisin
+              / /row
+            / /span4
+          -unless user_signed_in?
+            .span8
+              .row-fluid
+                .span12
+                  -#%h1 Register or Login
+                  / /span12
+                / /row-fluid
+
+                .row-fluid
+                  .span6
+                    %h1
+                      Register
+                    .control-group
+                    = simple_form_for(:user , :url => registration_path(:user), :html => {:class => 'form-vertical', :id => 'sign_up_form' }) do |f|
+                      -#%label.control-label{:for => "name"} Name:
+                      -#.controls
+                        %input#name.span12{:name => "contact_name", :type => "text"}/
+                      = f.error_notification
+                      = flash[:notice]
+
+                      =  f.input :name, :required => true ,:autofocus => true , input_html: { class: 'span12', :id => 'name' },  label: "Name:", :placeholder => "Your Name"
+                      =  f.input :email, :required => true , input_html: { class: 'span12', :id => 'contact_email' },  label: "Email:", :placeholder => "example@dummy.com"
+                      =  f.input :password, :required => true, input_html: { class: 'span12', :id => 'password' },  label: "Password:", :placeholder => "Password"
+                      =  f.input :password_confirmation, :required => true, input_html: { class: 'span12', :id => 'confirm_password' },  label: "Confirm Password:", :placeholder => "Repeat Password"
+                      =  f.fields_for :travel_preference do |s|
+                        %label{for: "preferences[]"} Travel Preferences:
+                        - ['car', 'foot', 'bicycle'].each do |travel|
+                          = s.check_box :"#{travel}"
+                          = travel.humanize
+                      %br/
+                      %br/
+                      =  f.fields_for :profile do |p|
+                        %label{for: "permissions[]"} Contact Permissions:
+                        - ['email_contact'].each do |contact|
+                          = p.check_box :"#{contact}"
+                          = contact.humanize
+                      %br/
+                      %br/
+
+                      %input{:name => "save", :type => "hidden", :value => "contact"}/
+                      %p After registration, do confirm your account by clicking link in the mail.
+                      %button.btn-inverse.pull-right#sign_up_submit{:type => "submit"}
+                        %span Register
+                        %i.icon-circle-arrow-right
+                      / /controls
+                    / /control-group
+                  / /span6
+
+                  .span6
+                    %h1
+                      Login
+                    .control-group
+                    = simple_form_for(:user, :url => session_path(:user), :html => {:class => 'form-vertical', :id => 'sign_in_form' }) do |f|
+                      -#%label.control-label{:for => "email"} Email1
+                      -#.controls
+                      -#  %input#email.span12{:name => "contact_email", :type => "email"}/
+                      = f.input :email, :autofocus => true, input_html: { class: 'span12', :id => 'user_email' },  label: "Email:", :placeholder => "example@dummy.com"
+                      = f.input :password, input_html: { class: 'span12',   :id => 'user_password' },  label: "Password:", :placeholder => "Password"
+                      = f.input :remember_me, :as => :boolean, inline_label: 'Remember me'
+                      %input{:name => "save", :type => "hidden", :value => "contact"}/
+                      %button.btn-inverse.pull-right#sign_in_submit{:type => "submit"}
+                        %span Sign In
+                        %i.icon-circle-arrow-right
+                      / /controls
+                    / /control-group
+                  / /span6
+                / /row-fluid
+          -if user_signed_in?
+            = hidden_field_tag "location_offer_id", @wish.blank? ? nil:@wish.offer_id
+
+            .row-fluid
+              .span4#step-1
+                :javascript
+                  $(document).ready(function(){
+                    if(!#{@wish.blank?}){
+                      $("#step-1 *").attr("disabled", "disabled").off('click');
+                    }
+                  });
+                -if @saved_wish.blank?
+                  %span.badge.badge-success.badge-size
+                    1
+                / <h4 class="intro">Where's your kid?</h4>
+                %h3 Where's your kid?
+                %p You're proposing a switch: you have a day care location and where you would like to switch to.
+                .control-group
+                  %label.control-label{:for => "phone"} Current District:
+                  .controls
+                    -#= select_tag :route_id, options_from_collection_for_select(Location.all, "id", "name", ""), :prompt => 'Select Location', :include_blank => true
+                    = select_tag :route_id, options_for_select(@locations.map {|location| [location.city, location.city]}, @district.blank? ? nil: @district), :prompt => 'Select District'
+                    -#%p#d_location
+
+                  / /controls
+                  %label.control-label{:for => "phone"} Current Location:
+                  .controls#states
+                    = render :partial => 'shared/locations'
+
+                  %label.control-label{:for => "validuntil"} Wish valid until:
+                  .controls
+                    %input#validuntil.span12{:name => "validuntil", :type => "date", :min => "#{Date.today + 1.week}" ,:value => "#{@wish.blank? ? Date.today + 1.month : @wish.valid_until.to_date}"}/
+                    -#%p#date_select
+                      = Date.today + 1.month
+                  -if @saved_wish.blank?
+                    .span12.order-wish-cont#order-wish
+                      -unless @wished_locations.blank?
+                        = render :partial => 'locations/ordered_wish_locations'
+                    :javascript
+                      $(document).ready(function(){
+                       if (!#{@saved_wish.blank?}){
+                         $("#order-wish *").attr("disabled", "disabled").off('click');
+                       }
+                      })
+
+                  / /controls
+                / /control-group
+              -if @saved_wish.blank?
+                .span8.choose-wish-location#step-2
+                  :javascript
+                    $(document).ready(function(){
+                      if(!#{@saved_wish.blank?}) {
+                        $("#step-2 *").attr("disabled", "disabled").off('click');
+                      }
+                      else {
+                        show_save();
+                      }
+
+                    })
+                  .row-fluid
+                    -if @saved_wish.blank?
+                      %span.badge.badge-success.badge-size
+                        2
+                      %h3 Choose locations you'd prefer to switch to
+                      %p Pick locations and order them in your order of preference.
+                      = select_tag :wish_route_id, options_for_select(@locations.map {|location| [location.city , location.city]}), :prompt => 'Select District', :class => "span12"
+                      #wished_locations
+                .save-wish-form#save-wish-form-cont{:style => "display: #{@saved_wish.blank? ? 'block': 'none'}"}
+                  = simple_form_for(:wish , :url => confirm_wish_wishes_path(:id => @wish.blank? ? nil:@wish.id), :html => {:class => 'form-vertical', :id => 'confirm_wish_form' }) do |f|
+                    =hidden_field_tag "wish_id", @wish.blank? ? nil:@wish.id
+                    %button.btn-inverse.pull-right#save_wish{:type => "submit"}
+                      %span Save My Wish
+                      %i.icon-circle-arrow-right
+
+              / /row-fluid
+              -unless @saved_wish.blank?
+                .span8
+                  .row-fluid#disabled-selected-wishes
+                    :javascript
+                      $(document).ready(function(){
+                        $("#disabled-selected-wishes *").attr("disabled", "disabled").off('click');
+                      });
+                    = render :partial => 'locations/ordered_wish_locations'
+
+
+              -#%form{:action => "#", :method => "POST"}
+
+              -#-unless @confirmation_request.blank?
+                -@confirmation_request.each_with_index do |request, index|
+                  .row-fluid.confirmation_request-container
+                    .span3
+                      %h3 FROM
+                      %img{:src => "/assets/img/map1.jpg", :class => "location_image"}/
+                      %p
+                        \ #{location_name(request, 'from')}
+
+                      = simple_form_for(:wish, :url => {:controller => :wishes, :action => :accept_match_request, :wish_log => request.id}, :html => {:class => 'form-vertical'}, :method => "POST") do |f|
+                        %button.btn-inverse.btn-inverse-green.pull-right#cancel_wish{:type => "submit"}
+                          %span Accept Request
+                          %i.icon-circle-arrow-right
+
+                    .span3
+                      %h3 TO
+                      %img{:src => "/assets/img/map1.jpg", :class => "location_image"}/
+                      %p
+                        \ #{location_name(request, 'to')}
+
+              -#-unless @hand_shake_request.blank?
+                -@hand_shake_request.each_with_index do |request, index|
+                  .row-fluid.confirmation_request-container
+                    .span3
+                      %h3 FROM
+                      %img{:src => "/assets/img/map1.jpg", :class => "location_image"}/
+                      %p
+                        \ #{location_name(request, 'to')}
+
+                      = simple_form_for(:wish, :url => {:controller => :wishes, :action => :hand_shake_confirmation, :wish_log => request.id}, :html => {:class => 'form-vertical'}, :method => "POST") do |f|
+                        %button.btn-inverse.btn-inverse-green.pull-right#cancel_wish{:type => "submit"}
+                          %span Accept Request
+                          %i.icon-circle-arrow-right
+
+                    .span3
+                      %h3 TO
+                      %img{:src => "/assets/img/map1.jpg", :class => "location_image"}/
+                      %p
+                        \ #{location_name(request, 'from')}
+              -unless @wish.blank?
+                -if @wish.saved and !@wished_locations.blank?
+                  -if @wish.status == "ACTIVE" and @confirmation_request.blank? and @hand_shake_request.blank?
+                    %p
+                      Your Wish is Active Now, We will let you know as soon as we find a Match for your desired locations.
+                    -if @wish
+                      -if @wish.saved
+                        = simple_form_for(:wish, :url => {:controller => :wishes, :action => :destroy, :id => @wish.id}, :html => {:class => 'form-vertical', :id => 'destroy_wish_form' }, :method => "DELETE") do |f|
+                          %button.btn-inverse.btn-inverse-red.pull-right#cancel_wish{:type => "submit"}
+                            %span Cancel My Wish
+                            %i.icon-circle-arrow-right
+
+                  -elsif @wish.status == "MATCH"
+                    %p
+                      Congratulations, You found a Match for Locations Swap, Your Wish has been sent for City Confirmation, We will let you know as soon as we hear from them.
+
+                  -elsif @wish.status == "MATCH_WAIT"
+                    %p
+                      We are waiting other party to accept your wish request so that swap process may start, we will let you know about the status as soon as we hear from them.
+
+                  -elsif @wish.status == "ACCEPT_WAIT"
+                    %p
+                      Please confirm the transfer so that swap procedure may start.
+
+                  -elsif @wish.status == "CONFIRMED"
+                    %p
+                      Congratulations, Your wish has been approved by City Government.
+
+                  -elsif @wish.status == "REJECTED"
+                    %p
+                      Sorry, Your wish has been Rejected by City Government.
+
+          #footer
+            .row-fluid
+              %p  
+              %p  
+              %p  
+              %hr/
+              .span12
+                .span3
+                  %p
+                    Contact:
+                    %a{:href => "mailto:aleksi@vaihtais.in"} aleksi@vaihtais.in
+                    %br/
+                    Media
+                .span3
+                  %p
+                    %a{:href => "https://docs.google.com"} Register information
+                .span3
+                  %p
+                    %a{:href => "FAQ"} FAQ
+                .span3
+                  %p
+                    %a{:href => "FAQ"} Terms of service
+              / /span12
+            / /row-fluid
+          / /footer
+        / /row-fluid
+      / /container-fluid
+  / /container
+/ /wrapper
+/ JAVASCRIPTS
+

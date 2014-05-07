@@ -1,0 +1,12 @@
+= simple_form_for(@wish) do |f|
+  = f.error_notification
+
+  .form-inputs
+    / = f.input :offer, as: :select, collection: Location.all#.map{|l| l.id}
+    / = f.input :offer, as: :select, collection: Location.all
+    = f.input :offer_id, as: :select, collection: Location.all.collect{|l| [l.name, l.id]}
+    / = f.input :offer, as: :select
+    = f.input :valid_until, as: :string, input_html: {class: 'datepicker'}
+
+  .form-actions
+    = f.button :submit
